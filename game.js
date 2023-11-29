@@ -93,7 +93,6 @@ let cubosAbaixo = 0;
 let loss = document.getElementById('loss')
 let win = document.getElementById('win')
 
-let cubosContados = new Set();
 // Função de animação para atualizar a física e renderizar a cena
 function animate() {
   requestAnimationFrame(animate)
@@ -104,6 +103,9 @@ function animate() {
     cubo.position.copy(cuboBody.position)
     cubo.quaternion.copy(cuboBody.quaternion)
     const posY = cuboBody.position.y;
+
+   if(posY<10){
+
     if (posY > 0) {
        cubosAcima++;   
         qtdAcima.innerHTML=  cubosAcima;
@@ -111,7 +113,7 @@ function animate() {
         cubosAbaixo++;
         qtdAbaixo.innerHTML= cubosAbaixo;
     }
-    cubosContados.add(cubo);
+  }
   
   })
   let ac = parseInt(qtdAcima.innerHTML)
@@ -137,9 +139,9 @@ function animate() {
       camera.lookAt(0, ycam, 0)
       caindo = false
     } }
-  if (ab > 11&& ac<51 ) {
+  if (ab > 10&& ac<50 ) {
   loss.style.display = 'flex'}
-  else if(ab<11&&ac>51){
+  else if(ab<=10&&ac>=50){
   win.style.display = 'flex'}
   renderer.render(scene, camera)
 }
